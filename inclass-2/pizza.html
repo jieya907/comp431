@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pizza Order</title>
+</head>
+<body>
+	<h1>Order your pizza!</h1>
+<form id="pizza" method="GET">
+  <p>Name: <input type="text" name="name" placeholder="Your name" required> </p>
+  <p>Address: ### Street Name ...<input type="text" name="address" placeholder="delivery address" required> </p>
+  <p>Phone Number: 123 <input type="tel" name="phone" pattern="\d\d\d" placeholder="123"> </p>
+  <p>Pizza Size <br>
+   	<input type="radio" name="size" value="Large" checked> Large
+  	<input type="radio" name="size" value="Medium"> Medium
+  	<input type="radio" name="size" value="Small"> Small </p>
+  	<p>Pizza Toppings <br>
+   	<input type="checkbox" name="topping" value="Sausage"> Sausage
+  	<input type="checkbox" name="topping" value="Olives"> Olives
+  	<input type="checkbox" name="topping" value="Mushrooms"> Mushrooms </p>
+  <input type="submit" value="Place Order">    
+  <input type="reset" value="Clear">
+</form>
+</body>
+</html>
