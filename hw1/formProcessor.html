@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Susan Wen">
+        <title>Form Processor</title>
+    </head>
+    <body>
+
+        <table id="display">
+        </table>
+        <script>
+            var contentstr = location.search.substring(1).split('&')
+            var numPair = contentstr.length;
+            var table = document.getElementById("display")
+            for (var i = 0; i < numPair; i++){
+                var newRow = table.insertRow(table.rows.length)
+
+                var key = newRow.insertCell(0)
+                var value = newRow.insertCell(1)
+
+                var pair = contentstr[i].split('=')
+                key.innerHTML = decodeURIComponent(pair[0])
+                value.innerHTML = decodeURIComponent(pair[1]).replace(/\+/g, " ")
+            }
+        </script>
+
+    </body>
+</html>
