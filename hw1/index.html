@@ -9,8 +9,8 @@
 
         <h1>Enter your user information</h1>
         <form action="formProcessor.html" id="userinfo" method="GET">
-            <p>Account Name: <input type="text" name="name" placeholder="Your name" pattern="\w+" required> </p>
-            <p>Email Address:<input type="email" name="email" placeholder="e.g. someone@gmail.com" required> </p>
+            <p>Account Name: <input type="text" name="name" placeholder="Your name" required> </p>
+            <p>Email Address:<input type="email" name="email" placeholder="e.g. someone@gmail.com" patter="\w+@\w+\.+[a-z]+$" required> </p>
             <p>Phone Number: <input type="tel" name="phone" pattern="\d+" placeholder="123" title="only digits allowed"> </p>
             <p>Date of Birth<input type="date" name="birthday" id="bday"> </p>
             <p>Zipcode<input type="text" name="zipcode" > </p>
