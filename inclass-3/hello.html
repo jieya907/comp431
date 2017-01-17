@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Susan Wen Bio</title>
+    </head>
+    <body onload="go()">
+
+        <h1>My name is Susan Wen!</h1>
+        <img src="http://animal-medical-clinic.com/wp-content/uploads/2014/03/So-cute-puppies-14749028-1600-1200.jpg" width="200px" title="Some picture">
+
+        <p>For my winter break, I went home to Shanghai, China and had a lot of fun!</p>
+        <a href="https://www.flickr.com/photos/jieya_wen/">I really like photography. Check out my flickr portfolio!</a>
+
+        <br>
+        <br>
+
+        <textarea rows="4" cols="50" id="comments">
+            Please enter some comments!
+        </textarea>
+        <button type="button">Submit!</button>
+        <button type="button" id="clear" onclick="return clearText()">Clear</button>
+        <button type="button" onclick="resume()"> Resume</button>
+        <button type="button" onclick="pause()">Pause</button>
+
+        <span id="indicator">
+    </body>
+    <script>
+        function clearText() {
+            document.getElementById("comments").value = "";
+        }
+
+        function noticeUser() {
+            alert("The page will redirect when the counter reaches zero");
+        }
+        var n = 15;
+
+        let interval;
+        function count() {
+            var indicator = document.getElementById("indicator");
+            indicator.innerHTML = n;
+            if (n == 0) {
+                clearInterval(interval);
+                window.location.replace("http://www.clear.rice.edu/comp431/sample/hello.html");
+            }
+    
+            n--;
+        }
+        function go() {
+            setTimeout(noticeUser, 5000);
+            interval = setInterval(count, 1000 );
+        }
+        function pause(){
+            clearInterval(interval);
+        }
+        function resume() {
+            interval =  setInterval(count, 1000 );
+        }
+    </script>
+</html>
