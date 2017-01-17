@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <html lang="en-US">
+    <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
         <meta name="author" content="Susan Wen">
@@ -9,13 +9,13 @@
 
         <h1>Enter your user information</h1>
         <form action="formProcessor.html" id="userinfo" method="GET">
-            <p>Account Name: <input type="text" name="name" placeholder="Your name" required> </p>
-            <p>Email Address:<input type="email" name="email" placeholder="delivery address" required> </p>
-            <p>Phone Number: 123 <input type="tel" name="phone" pattern="\d+" placeholder="123"> </p>
-            <p>Date of Birth<input type="date" name="birthday" placeholder="123"> </p>
-            <p>Zipcode<input type="text" name="zipcode" placeholder="123"> </p>
-            <p>Password<input type="password" name="password" placeholder="123"> </p>
-            <p>Password Confirmation<input type="password" name="passconfirm" placeholder="123"> </p>
+            <p>Account Name: <input type="text" name="name" placeholder="Your name" pattern="\w+" required> </p>
+            <p>Email Address:<input type="email" name="email" placeholder="e.g. someone@gmail.com" required> </p>
+            <p>Phone Number: <input type="tel" name="phone" pattern="\d+" placeholder="123" title="only digits allowed"> </p>
+            <p>Date of Birth<input type="date" name="birthday" id="bday"> </p>
+            <p>Zipcode<input type="text" name="zipcode" > </p>
+            <p>Password<input type="password" name="password" pattern=".{6,}" title="Six or more characters" required> </p>
+            <p>Password Confirmation<input type="password" name="passconfirm" required> </p>
             <input type="hidden" name="time" id="timestamp">
             <input type="submit" value="Submit" onclick="return validateForm(this.parent)">
             <input type="reset" value="Clear">
@@ -27,15 +27,22 @@
                 if (!form) {
                     form = document.getElementById('userinfo')
                 }
-                console.log(form)
-                console.log(form.password.value)
-                console.log(form.passconfirm.value)
+
+                // Got the idea of these lines from stackoverflow.
+                var diff = Date.now() - new Date(document.getElementById("bday").value).getTime()
+                var ageDate = new Date(diff)
+                var age = Math.abs(ageDate.getUTCFullYear() - 1970)
+
+
                 if (form.password.value != form.passconfirm.value){
                     alert("password and confirmation don't match!");
                     return false;
                 }
 
-                return true
+                if (age < 18) {
+                    alert("User must be older than 18!");
+                    return false;
+                }
             }
         </script>
     </body>
