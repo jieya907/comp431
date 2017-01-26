@@ -1,0 +1,35 @@
+td {
+    padding: 0.5em;
+    margin: 1em;
+    width: 50%;
+    background-color: lightcyan;
+}
+
+td {
+    border: 2px solid grey;
+}
+table {
+    table-layout: fixed;
+    
+}
+div {
+    margin: 1em;j
+    display: block;
+}
+
+#help {
+    color: red;
+}
+img{
+    height:200px; 
+    width:auto; 
+}
+
+div.container{
+    text-align: left;
+}
+
+body {
+    text-align: center;
+    background-color: gainsboro;
+}

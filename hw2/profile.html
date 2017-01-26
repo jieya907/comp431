@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Profile</title>
+        <meta name="author" content="Susan Wen">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1> Update account information </h1>
+        <span id="help"> </span>
+        <div class="container">
+            <div class="field">Account Name: 
+                <input type="text" id="name" placeholder="Your Name" required> 
+                <span class="content">Leebs</span> 
+            </div>
+            <div class="field">Email Address:
+                <input type="email" id="email" placeholder="e.g. someone@gmail.com" pattern="\w+@\w+\.+[a-z]+$" required> 
+                <span class="content">dleebron@rice.edu</span>
+            </div>
+            <div class="field">Phone Number: <input type="tel" id="phone" pattern="\d+" placeholder="123" title="only digits allowed"> 
+                <span class="content">7133480000</span>
+            </div>
+            <div class="field">Date of Birth<input type="date" id="birthday" id="bday">
+                <span class="content">1912-01-01</span>
+            </div>
+
+            <div class="field">Zipcode<input type="text" id="zipcode" pattern="\d+">
+                <span class="content">77005</span>
+            </div>
+            <div class="field">Password<input type="password" id="password" pattern=".{6,}" title="Six or more characters" required>            
+                <span class="content" hidden>77005</span></div>
+            <div class="field">Password Confirmation<input type="password" id="passconfirm" required>            
+                <span class="content" hidden>77005</span>
+            </div>
+            <div>
+                <input type="button" value="Update" id="my_button">
+                <a href="main.html">Link to main page</a>
+            </div>
+        </div>
+    </body>
+    <script src="profile.js"></script>
+</html>
