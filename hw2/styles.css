@@ -3,11 +3,14 @@ td {
     margin: 1em;
     width: 50%;
     background-color: lightcyan;
+    border: 2px solid grey;
+
 }
 
-td {
-    border: 2px solid grey;
+td:hover {
+    background-color:white;
 }
+
 table {
     table-layout: fixed;
     
@@ -17,6 +20,13 @@ div {
     display: block;
 }
 
+div.field:hover {
+    background-color:aliceblue;
+}
+.field {
+    margin-bottom: 2em;
+    width: 30em;
+}
 #help {
     color: red;
 }
@@ -26,10 +36,19 @@ img{
 }
 
 div.container{
+    background-color:linen;
     text-align: left;
+    width: 30em;
+    border-radius: 25px;
+    padding: 20px; 
+    width: 30em;
 }
 
 body {
-    text-align: center;
     background-color: gainsboro;
+    margin: 2em 1em;
+}
+
+h1 {
+    margin 5em;
 }
