@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Barbecue!</title>
+        <meta name="author" content="Susan Wen">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="game.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+        <select id="droplist" name="level">
+            <option value="l1">Dinner</option>
+            <option value="l2">Dinner with friends</option>
+            <option value="l3">Party</option>
+            <option value="l4">College event</option>
+        </select>
+        <input id="level" type="submit" value="Choose a level">
+        <div>
+            <span> Current score:</span>
+            <span id="score"> 0 </span>
+        </div>
+        <input id="start" type="button" value="Start the game!">
+        <div>
+            <div>
+                <span>Time Remaining</span>
+                <span id="indicator"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <img id="potato" src="images/potato.png">
+                    <span class="item_count"> 0 </span>
+                </div>
+                <div class="col-xs-4">
+                    <img id="corn" src="images/corn.png">
+                    <span class="item_count"> 0 </span>
+
+                </div>
+                <div class="col-xs-4">
+                    <img id="sausage" src="images/rawsausage.png">
+                    <span class="item_count"> 0 </span>
+
+                </div>
+                <div class="col-xs-4">
+                    <img id="wing" src="images/wing.png">
+                    <span class="item_count"> 0 </span>
+
+                </div>
+                <div class="col-xs-4">
+                    <img id = "beef" src="images/beef.png">
+                    <span class="item_count"> 0 </span>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <canvas width="800" height="800"></canvas>
+        </div>
+    </body>
+</html>
