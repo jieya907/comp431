@@ -14,11 +14,17 @@
     }
 
     function createElement(node) {
-        console.log('Create element called for', node)
         // create the element and return it to the caller
         let element = document.createElement(node.tag);
         for (let p in node.props) {
-            element.setAttribute(p, node.props[p])
+            if (p.substring(0, 2) == "on") {
+                //console.log(node.props[p])
+                console.log(p.substring(2, p.length).toLowerCase())
+                element.addEventListener(p.substring(2, p.length).toLowerCase(), node.props[p]);
+                console.log(element);
+            } else {
+            element[p] = node.props[p];
+            }
         }
         if (node.children) {
             node.children.forEach((c)=> {
@@ -60,8 +66,8 @@
             // you can use my changed(node1, node2) method above
             // to determine if an element has changed or not
             if (changed(oldNode, newNode)) {
-                console.log(oldNode);
-                console.log(newNode);
+                //console.log(oldNode);
+                //console.log(newNode);
                 parent.appendChild(createElement(newNode));
             }
             
