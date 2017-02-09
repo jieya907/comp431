@@ -9,6 +9,24 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
     <body>
+
+        <div id="light" class="white_content">
+            <span id="endmsg">Game over. </span>
+            <input id="restart" type="submit" value="Start over">
+        </div>
+        <div id="fade" class="black_overlay"></div>
+        <input id="showinst" type="button" value="Show Instruction">
+        <div id="instruction">
+            <p><strong> Instruction: </strong> Choose a level to start the game.
+            <br> Click on "Start the game!" to start.
+            <br> Click on the food item to select what you want to grill.
+            <br> Then click on the grill to put the item on. 
+            <br> When the food is ready, the background will turn red. Click on it to flip the
+            item. <br> Wait for the background color to turn red again to click it so you remove
+            the item off the grill. In this case, the food is done cooking and you get the point.
+            <br> Have fun!!</p>
+        </div>
+        <div class="container">
         <select id="droplist" name="level">
             <option value="l1">Dinner</option>
             <option value="l2">Dinner with friends</option>
@@ -16,16 +34,19 @@
             <option value="l4">College event</option>
         </select>
         <input id="level" type="submit" value="Choose a level">
+        </div>
         <div>
             <span> Current score:</span>
             <span id="score"> 0 </span>
         </div>
+
+        <div>
+            <span>Time Remaining</span>
+            <span id="indicator"></span>
+        </div>
+
         <input id="start" type="button" value="Start the game!">
         <div>
-            <div>
-                <span>Time Remaining</span>
-                <span id="indicator"></span>
-            </div>
             <div class="row">
                 <div class="col-xs-4">
                     <img id="potato" src="images/potato.png">

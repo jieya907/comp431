@@ -3,6 +3,7 @@ const RAW = 0;
 const FLIPPED = 1;
 const DONE = 2;
 const OVER = 3;
+const cookingtime = 7;
 
 var createApp = function(canvas) {
     var c = canvas.getContext("2d")
@@ -27,6 +28,7 @@ var createApp = function(canvas) {
         this.y = y;
         let time_remain = 5;
         this.numFlipped = 0;
+        this.state = RAW;
         this.decrement = function () {
             return --time_remain;
         }
@@ -34,9 +36,10 @@ var createApp = function(canvas) {
             time_remain = 5;
             draw_food(x, y, type, "yellow");
 
+            this.state = RAW;
             return time_remain;
         }
-        this.state = RAW;
+       
 
     }
 
@@ -79,12 +82,13 @@ var createApp = function(canvas) {
         if (game_on) {
             draw_grill(on_grill);
             foods.forEach( (fd)=>{
-                if (fd.state == RAW) {
+                if (fd.state === RAW) {
                     draw_food(fd.x, fd.y, fd.type, "yellow");
-                } else if (fd.state == OVER) {
+                } else if (fd.state === OVER) {
                     c.fillStyle = "black";
                     c.fillRect(fd.x - size/2, fd.y - size/2, size, size);
-                } else {
+
+                } else if (fd.state === DONE){
 
                     draw_food(fd.x, fd.y, fd.type, "red");
                 }
@@ -98,6 +102,7 @@ var createApp = function(canvas) {
         if (game_on) {
             const patty = document.getElementById(type);
 
+            console.log(patty);
             c.fillStyle = color;
             c.fillRect(x - size/2, y - size/2, size, size);
             c.drawImage(patty, x - size/2, y - size/2, size, size);
@@ -105,6 +110,22 @@ var createApp = function(canvas) {
         }
     }
 
+    function end_game() {
+        n = 0;
+        window.stopCountdown();
+        level_select = 0;
+        document.getElementById('light').style.display='block';
+        document.getElementById('fade').style.display='block';
+        document.getElementById("endmsg").innerHTML = 
+            "Game over, your score is " + score;
+        document.getElementById("restart").addEventListener("click", ()=> {
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none';
+            score = 0;
+            document.getElementById("score").innerHTML = score; 
+        })
+    }
+    // Update on the game every second
     const count = function() {
         let indicator = document.getElementById("indicator");
         indicator.innerHTML = n;
@@ -119,12 +140,11 @@ var createApp = function(canvas) {
                 // Overcooked, penalty
                 c.fillStyle = "black"
                 c.fillRect(fd.x - size/2, fd.y - size/2, size, size);
-                fd.type = OVER;
+                fd.state = OVER;
             }
         })
         if (n <= 0) {
-            window.stopCountdown();
-            level_select = 0;
+            end_game();
         }
         n--;
     }
@@ -140,51 +160,56 @@ var createApp = function(canvas) {
 
     const start_game = function () {
         if (level_select) {
-        foods = [];
-        [].forEach.call(document.getElementsByClassName("col-xs-4"), (d)=> {
-            d.style.visibility = 'visible';
-        })
-        draw_grill(on_grill)
-        if (!countdownTimer) {
-            countdownTimer = setInterval(count,1000)
-            game_on = 1;
-        }
+            foods = [];
+            [].forEach.call(document.getElementsByClassName("col-xs-4"), (d)=> {
+                d.style.visibility = 'visible';
+            })
+            draw_grill(on_grill)
+            if (!countdownTimer) {
+                countdownTimer = setInterval(count,1000)
+                game_on = 1;
+            }
         }
     }
 
+    // base on user's selection of difficulty, set difficulty.
     const set_level = function () {
         const level = document.getElementById("droplist");
         level_select = 1;
         switch (level.value) {
             case "l1":
-                n = 15;
+                n = 20;
                 set_items(1);
                 break;
             case "l2":
-                n = 20;
+                n = 25;
+                set_items(2);
                 break;
             case "l3":
-                n = 15;
+                n = 30;
+                set_items(3);
                 break;
             case "l4":
-                n = 15;
+                n = 40;
+                set_items(4);
                 break;
         }
     }
 
     const set_items = function (n) {
         let items = document.getElementsByClassName("item_count") ;
-        console.log(items)
+        //console.log(items)
         item_remain = [].slice.call(items).reduce((o, v) => {
-            console.log(v);
-            console.log(v.previousElementSibling.id);
+            //   console.log(v);
+            //  console.log(v.previousElementSibling.id);
             o[v.previousElementSibling.id] = n;
             v.innerHTML = n;
             return o;
         }, {})
-        console.log(item_remain)
+        //console.log(item_remain)
         return item_remain;
     }
+
     let toAdd = false;
     // Return the list of food that needs to be remained.
     function onFood(e) {
@@ -201,7 +226,8 @@ var createApp = function(canvas) {
             // Clicked on the food item
             //console.log(left + " " + right + " " + ftop + " " + fbot);
             if (right > x && left <= x && fbot > y && ftop <= y) {
-                if (f.state == DONE) {
+                console.log (f.state)
+                if (f.state === DONE) {
                     f.numFlipped++;
                     if (f.numFlipped == 2) {
                         // Update the player's score. 
@@ -220,19 +246,26 @@ var createApp = function(canvas) {
         })
     }
 
+    document.getElementById("showinst").addEventListener("mousedown", ()=>{
+        document.getElementById("instruction").style.display = "block";
+    })
+
+    document.getElementById("showinst").addEventListener("mouseup", ()=>{
+        document.getElementById("instruction").style.display = "none";
+    })
     canvas.addEventListener("click", function(e) {
         // check if the food is clicking on existing food. 
         toAdd = true;
         const clked = onFood(e);
-        if (clked.length == foods.length && toAdd && chosen) {
+        if (clked.length == foods.length && toAdd && chosen&&game_on) {
             // If nothing is clicked, draw the food and add it to existing.
             // Update the remaining food count
             const foodElement = document.getElementById(item);
             foodElement.nextElementSibling.innerHTML--;
-            console.log(item_remain);
+            //console.log(item_remain);
             if (--item_remain[item] == 0 ) {
-                
-                console.log(foodElement.parentElement);
+
+                //console.log(foodElement.parentElement);
                 foodElement.parentElement.style.visibility = 'hidden';
             }
             draw_food(e.offsetX, e.offsetY, item, "yellow");
