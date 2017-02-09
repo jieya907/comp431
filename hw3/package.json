@@ -1,0 +1,16 @@
+{
+  "name": "hw3",
+  "version": "1.0.0",
+  "description": "{      \"netid\": \"jw46\",     \"title\": \"Barbecue!\",     \"site\": \"http://shaky-building.surge.sh/\" }",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^3.2.7"
+  }
+}
