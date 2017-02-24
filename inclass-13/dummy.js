@@ -85,7 +85,7 @@ const updateHeadline = (headline) => {
 
         // IMPLEMENT ME
         //   * Update the headline shown in the #message box
-           toggle(true)
+           toggle(false)
         // FYI response.headline = { username, headline }
     })
 }
