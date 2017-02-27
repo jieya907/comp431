@@ -1,37 +1,19 @@
+
 import * as Actions from './actions'
 const initialItems = require('./initialState.json')
 
 const Reducer = (state={
-    login: false,
-    account: {
-        name:"",
-        password:"",
-    },
-    page: 'LANDING',
-    message: "",
+    account: {},
+    location: 'LANDING',
+    errorMessage: "",
 }, action) => {
     switch (action.type) {
         case Actions.ERROR:
-            return {...state, message: action.message}
+            return {...state, errorMessage: action.text}
         case Actions.ROUTE_TO:
-            return {...state, page: action.page}
+            return {...state, location: action.location}
         case Actions.UPDATE_ACCOUNT:
-            switch (action.field) {
-                case "name":
-                    return {...state, 
-                        account: {
-                            ...state.account, 
-                            name: action.text
-                        }}
-                case 'password':
-                    return {...state, 
-                        account: {
-                            ...state.account, 
-                            password: action.text
-                        }}
-                default:
-                    return state;
-            }
+            return {...state, account: action.account, location:'MAIN'}
         default:
             return state;
     }

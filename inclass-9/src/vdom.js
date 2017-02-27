@@ -15,13 +15,15 @@
 
     function createElement(node) {
         // create the element and return it to the caller
+        const self = this;
         let element = document.createElement(node.tag);
         for (let p in node.props) {
-            if (p.substring(0, 2) == "on") {
+            if (typeof node.props[p] === 'function') {
                 //console.log(node.props[p])
                 console.log(p.substring(2, p.length).toLowerCase())
-                element.addEventListener(p.substring(2, p.length).toLowerCase(), node.props[p]);
-                console.log(element);
+                const func = node.props[p]
+                console.log(func);
+                element.addEventListener(p.substring(2, p.length).toLowerCase(), func);
             } else {
             element[p] = node.props[p];
             }
@@ -60,6 +62,7 @@
         console.log("In update element");
 
         if (!oldNode) {
+            console.log(newNode);
             parent.appendChild(createElement(newNode))
         } else {
             console.log('update element that may have changed')
