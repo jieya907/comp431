@@ -20,12 +20,7 @@ const store = createStore(Reducer, applyMiddleware(logger))
 
 render(
     <Provider store={store}>
-        <Router history={browserHistory}>
-            <Route path="/" component={Registration}>
-                <IndexRoute component={Home}/>
-                <Route path="main" component={Main} />
-            </Route>
-        </Router>
+        <Home/>
     </Provider>,
     document.getElementById('app')
 )
