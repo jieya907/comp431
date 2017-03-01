@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import User from "./user"
+import Self from "./self"
 
 export const AddFollow = ({ addFollow }) => {
 
@@ -23,9 +24,12 @@ export const AddFollow = ({ addFollow }) => {
         </span>)
 
 }
+
+
 export const Sidebar = ({following, addFollow})=> {
     return (
         <div className="sidebar">
+        <Self />
         <AddFollow addFollow={addFollow}/>
         <ul>
         {

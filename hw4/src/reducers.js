@@ -15,6 +15,7 @@ const Reducer = (state={
     location: 'LANDING',
     profAccount : initialItems.profAccount,
     search: "",
+    headline: "I NEED 8 HRS SLEEP",
 }, action) => {
     switch (action.type) {
         case Actions.ERROR:
@@ -23,6 +24,9 @@ const Reducer = (state={
             return {...state, location: action.location}
         case Actions.UPDATE_ACCOUNT:
             return {...state, account: action.account}
+        case Actions.UPDATE_HEADLINE:
+            console.log(action.text);
+            return {...state, headline: action.text}
         case Actions.UPDATE_PROF_ACCOUNT:
             return {...state, profAccount: action.account}
         case Actions.ADD_CONTENT:

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 
 import Articles from './articles/articles'
-import User from "./user/user"
 import Sidebar from "./user/sidebar"
 import * as Actions from '../../actions'
 export const Main = ({ location, routePage }) => {
@@ -17,7 +16,6 @@ export const Main = ({ location, routePage }) => {
             <button onClick={()=>_route('PROFILE')}>Profile Page </button>
             <button onClick={()=>_route('LANDING')}>Log Out</button>
             <Sidebar/>
-            <User/>
             <Articles/>
         </div>
     )

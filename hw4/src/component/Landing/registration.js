@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Button } from 'react-bootstrap';
 
 import { browserHistory } from 'react-router';
 
@@ -27,7 +28,7 @@ export const Registration = ({ errorMessage, account, update }) => {
     }
 
     return (
-        <div>
+        <div className="reg">
         <b>{errorMessage}</b>
         <ul className="registration">
         <li>Display Name 
@@ -59,7 +60,9 @@ export const Registration = ({ errorMessage, account, update }) => {
         </li>
 
         </ul>
+        <br/>
         <button onClick={()=>_route('MAIN')}>Submit</button>
+        <br/>
         </div>
     )
 }

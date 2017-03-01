@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Button } from 'react-bootstrap';
 
 export const Login = ({login})=> {
 
@@ -13,7 +14,7 @@ export const Login = ({login})=> {
     }
 
     return (
-        <div>
+        <div className="login">
         <input name="loginName" type="text" placeholder="Username" ref={(node) => uname = node}/>
         <input name="loginPw" type="password" placeholder="Password" ref={(node) => pw = node}/>
         <button onClick={()=>_login()}>Log In</button>

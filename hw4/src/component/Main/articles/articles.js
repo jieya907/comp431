@@ -45,7 +45,7 @@ export const Articles = ({ user, contents, addArticle, search }) => {
         } 
     }
     
-    return (<div>
+    return (<div className="content">
         <AddArticle user={user} addArticle={addArticle}/>
 
         <input name="searchBar" type="text" placeholder="Search your feed" ref={(node) => searchTerm = node} onChange={_search} />

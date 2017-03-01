@@ -5,7 +5,7 @@ import Registration from "./registration.js"
 import Login from "./login.js"
 
 export const Landing = () => (
-    <div>
+    <div className="rol">
         <Registration/>
         <Login/>
     </div>

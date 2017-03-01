@@ -9,7 +9,7 @@ export const Card = ({text, time, image, author}) => (
     <li>
         <span> {stmp2date(author, time)} </span>
         <span>{text}</span>
-        <img src={image}/>
+        <img src={image} className={ image === "" ? "hideImg" : ""}/>
         <button>Edit</button>
         <button>Comment</button>
     </li>
