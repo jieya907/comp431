@@ -67,3 +67,14 @@ li .check {
 	transition: color 0.2s ease-out;
 }
 
+#sidebar {
+    position:absolute;
+    top:0; bottom:0; left:0;
+    width:50px;
+    background:#000;
+}
+
+img{
+    height:200px; 
+    width:auto; 
+}

@@ -10,10 +10,8 @@ import { Provider } from 'react-redux'
 import createLogger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux'
 
-import Registration from './registration'
-import Main from './main'
 import Reducer from './reducers'
-import Home from './Home'
+import Home from './component/Home'
 
 const logger = createLogger()
 const store = createStore(Reducer, applyMiddleware(logger))

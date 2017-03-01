@@ -1,22 +1,28 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import Registration from './registration'
-import Main from './main'
-
+import Landing from './Landing/landing'
+import Main from './Main/main'
+import Profile from './Profile/profile'
 
 export const Home = ({ location }) => {
     console.log(location)
     if (location === 'LANDING') {
         return (
             <div>
-            <Registration/>
+            <Landing/>
             </div>)
     } else if (location ==='MAIN') {
         return (
             <div>
             <Main/>
             </div>)
+    } else if (location ==='PROFILE') {
+        return (
+            <div>
+            <Profile/>
+            </div>
+        )
     }
 }
 
