@@ -28,9 +28,11 @@ export const AddArticle = ({user, addArticle}) => {
 
     return (<span>
         <input name="inputArticle" type="text" placeholder="Post" ref={(node) => newContent = node} />
+        <div className="editBtn">
         <button name="btnAddArticle" onClick={_addArticle}>Add Post</button>
         <button name="btnClear" onClick={_clear}>Clear</button>
         <input type="file"/>
+        </div>
 
     </span>)
 }
@@ -45,16 +47,16 @@ export const Articles = ({ user, contents, addArticle, search }) => {
         } 
     }
     
-    return (<div className="content">
+    return (<div className="col-sm-9">
         <AddArticle user={user} addArticle={addArticle}/>
 
         <input name="searchBar" type="text" placeholder="Search your feed" ref={(node) => searchTerm = node} onChange={_search} />
-        <ul className="article">
+        <div className="article">
             {
                 contents.map((obj, id) => (
                     <Card key={id} text={obj.text} time={obj.timestamp} image={obj.image} author={obj.author}/>
                 ))}
-        </ul>
+        </div>
     </div>)
 
 }

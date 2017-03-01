@@ -6,13 +6,16 @@ const stmp2date = (author, time) => {
 }
 
 export const Card = ({text, time, image, author}) => (
-    <li>
-        <span> {stmp2date(author, time)} </span>
+    <div className="card">
+        <b> {stmp2date(author, time)} </b>
+        <br/>
         <span>{text}</span>
         <img src={image} className={ image === "" ? "hideImg" : ""}/>
+        <div className="editBtn">
         <button>Edit</button>
         <button>Comment</button>
-    </li>
+        </div>
+    </div>
 )
 
 export default connect(null, null)(Card)

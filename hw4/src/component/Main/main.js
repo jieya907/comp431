@@ -11,7 +11,7 @@ export const Main = ({ location, routePage }) => {
     }
 
     return (
-        <div>
+        <div className="row">
             <h1>Main Page </h1>
             <button onClick={()=>_route('PROFILE')}>Profile Page </button>
             <button onClick={()=>_route('LANDING')}>Log Out</button>

@@ -14,7 +14,9 @@ export const Login = ({login})=> {
     }
 
     return (
-        <div className="login">
+        <div className="col-sm-6">
+        <h2> Please Login with your user information </h2>
+        <br/>
         <input name="loginName" type="text" placeholder="Username" ref={(node) => uname = node}/>
         <input name="loginPw" type="password" placeholder="Password" ref={(node) => pw = node}/>
         <button onClick={()=>_login()}>Log In</button>

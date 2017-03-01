@@ -4,10 +4,13 @@ import { connect } from 'react-redux'
 export const User = ({account, name, text, image, unfollow}) => {
     return (
         <div>
-            <span> {name}</span>
+            <b> {name}</b>
+            <br/>
             <span> {text}</span>
             <img src={image}/>
+            <div className= "editBtn">
             <button onClick={unfollow}>Unfollow</button>
+            </div>
         </div>
     )
 }

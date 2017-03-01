@@ -16,7 +16,7 @@ export const Profile = ({errorMessage, account, update, routePage}) => {
     }
     return (
         <div>
-        <p> Update your profile information </p>
+        <h1> Update your profile information </h1>
         <b>{errorMessage}</b>
         <ul className="profile">
         <li>Display Name 

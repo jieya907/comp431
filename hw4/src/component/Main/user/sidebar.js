@@ -28,7 +28,7 @@ export const AddFollow = ({ addFollow }) => {
 
 export const Sidebar = ({following, addFollow})=> {
     return (
-        <div className="sidebar">
+        <div className="col-sm-3" id="sidebar">
         <Self />
         <AddFollow addFollow={addFollow}/>
         <ul>

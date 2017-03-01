@@ -9,12 +9,12 @@ export const Home = ({ location }) => {
     console.log(location)
     if (location === 'LANDING') {
         return (
-            <div>
+            <div className="container-fluid">
             <Landing/>
             </div>)
     } else if (location ==='MAIN') {
         return (
-            <div>
+            <div className="container-fluid">
             <Main/>
             </div>)
     } else if (location ==='PROFILE') {

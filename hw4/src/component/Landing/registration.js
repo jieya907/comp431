@@ -28,7 +28,8 @@ export const Registration = ({ errorMessage, account, update }) => {
     }
 
     return (
-        <div className="reg">
+        <div className="col-sm-6">
+        <h2> Register with your information </h2>
         <b>{errorMessage}</b>
         <ul className="registration">
         <li>Display Name 

@@ -6,8 +6,9 @@ import Login from "./login.js"
 
 export const Landing = () => (
     <div className="rol">
-        <Registration/>
+    	<h1> Welcome to Rice book! </h1>
         <Login/>
+        <Registration/>
     </div>
 )
 

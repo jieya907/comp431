@@ -7,7 +7,7 @@ span.submit {
 }
 
 .login {
-	display: flex;
+	display: block;
 	width: 50%;
     height: auto;
     float: left;
@@ -16,15 +16,9 @@ span.submit {
 }
 
 .reg {
-	display: flex;
+	display: block;
 	margin-left: 50%;
     height: auto;
-}
-
-.sidebar {
-	width: 30%;
-	height: 100%;
-	float: left;
 }
 
 .content {
@@ -36,40 +30,43 @@ span.submit {
 .hideImg {
 	display: none;
 }
+
 li {
 	list-style: none;
 	position: relative;
 	font-size: 15px;
-	border-bottom: 1px solid #ededed;
 }
 
 li span {
 	white-space: pre-line;
 	word-break: break-all;
-	padding: 15px 60px 15px 15px;
-	display: block;
+	padding: 1px 60px 15px 15px;
 	line-height: 1.2;
 	transition: color 0.4s;
 }
 
-li .completed {
-	color: #d9d9d9;
-	text-decoration: line-through;
+.editBtn {
+	display: block;
 }
 
-#sidebar {
-    position:absolute;
-    top:0; bottom:0; left:0;
-    width:50px;
-    background:#000;
-}
-
-.sidebar img {
-	width: 10em;
+#sidebar img {
+	width: 7em;
 	height: auto;
 }
 
+#sidebar {
+	background-color: "seashell";
+}
+.card {
+	display: block;
+	padding-top: 1em;
+}
+
+h1 {
+	 text-align: center;
+}
 img{
     height:200px; 
     width:auto; 
+    display: block;
 }
