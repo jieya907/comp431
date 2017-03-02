@@ -1,9 +1,0 @@
-
-> starter@1.0.0 e2e:base /Users/jieya/Downloads/mocking
-> mocha --opts e2e/mocha.opts e2e/*.spec.js "--reporter" "xunit"
-
-<testsuite name="Mocha Tests" tests="3" failures="0" errors="0" skipped="0" timestamp="Thu, 02 Mar 2017 01:56:25 GMT" time="11.194">
-<testcase classname="Test Dummy Server Example Page" name="should log in as the test user" time="0.547"/>
-<testcase classname="Test Dummy Server Example Page" name="Update the headline and verify the change" time="2.707"/>
-<testcase classname="shutdown" name="now" time="0.12"/>
-</testsuite>
