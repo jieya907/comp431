@@ -1,0 +1,21 @@
+{
+  "articles": [
+    {
+      "id" : 1,
+      "author": "A",
+      "text": "something"
+    }, 
+    {
+      "id" : 2,
+      "author": "A",
+      "text": "something"
+    }, 
+{
+      "id" : 3,
+      "author": "A",
+      "text": "something"
+    }
+
+  ]
+
+}
