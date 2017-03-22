@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-export const Login = ({login})=> {
+import {  loginFetch, fetchArticles } from '../../backend'
+
+export const Login = ({locallogin, articles})=> {
 
     let uname;
     let pw;
 
     const _login = ()=> {
         if (uname && uname.value && pw && pw.value) {
-            login(uname.value)
+            locallogin(uname.value, pw.value)
+            //articles()
         }
     }
 
@@ -25,9 +28,6 @@ export const Login = ({login})=> {
 
 export default connect(
     (state) => ({ errorMessage: state.errorMessage }),
-    (dispatch) => {
-        return {
-            login: (uname) => dispatch({type: "LOGIN", uname})
-        }
-    }
+    (dispatch) => ({locallogin: (username, password) => loginFetch(username, password)(dispatch),
+                   articles: () => fetchArticles()(dispatch)})
 )(Login)
