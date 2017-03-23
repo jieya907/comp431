@@ -34,3 +34,12 @@ export const setSuccessMsg = (msg) => {
         })
     }
 }
+
+export const routeTo = (location) => {
+    return (dispatch) => {
+        dispatch({
+            type: ROUTE_TO,
+            location: location
+        })
+    }
+}

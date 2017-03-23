@@ -29,7 +29,7 @@ Main.propTypes = {
 export default connect ((state) => ({location: state.location}), 
     (dispatch) => {
         return {
-            routePage : (page) => dispatch({ type: Actions.ROUTE_TO, location: page })
+            routePage : (page) => Actions.routeTo(page)(dispatch)        
         }
     }
 )(Main)

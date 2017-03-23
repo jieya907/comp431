@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import mockery from 'mockery'
 import { loginFetch, resource, url } from './backend'
-import { setErrorMsg, setSuccessMsg } from './actions'
+import { setErrorMsg, setSuccessMsg, routeTo } from './actions'
 
 // npm install https://www.clear.rice.edu/comp431/sample/mock-fetch.tgz
 import fetch, { mock } from 'mock-fetch'
@@ -102,5 +102,17 @@ describe('Validate actions', () => {
 
         done()
     })
+
+    it ('should navigate', (done) => {
+        const loc = 'MAIN'
+        routeTo(loc)(a => {
+            expect(a.type).to.equal('ROUTE_TO')
+            expect(a.location).to.equal(loc)
+        })
+
+        done()
+    })
+
+
 })
 
