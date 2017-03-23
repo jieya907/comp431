@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import { logoutFetch } from '../../backend.js'
 
 import Articles from './articles/articles'
 import Sidebar from "./user/sidebar"
@@ -10,6 +11,10 @@ export const Main = ({ location, routePage }) => {
         routePage(page)
     }
 
+    const _logout = () => {
+        logOut();
+        routePage('LANDING')
+    }
     return (
         <div className="row">
             <h1>Main Page </h1>
@@ -29,7 +34,8 @@ Main.propTypes = {
 export default connect ((state) => ({location: state.location}), 
     (dispatch) => {
         return {
-            routePage : (page) => Actions.routeTo(page)(dispatch)        
+            routePage : (page) => Actions.routeTo(page)(dispatch),
+            logOut: ()=> logoutFetch()(dispatch)
         }
     }
 )(Main)

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import { logoutFetch } from '../../backend.js'
 import * as Actions from '../../actions'
 import * as Validate from '../../validate'
 
@@ -14,6 +15,7 @@ export const Profile = ({account, errorMessage, email, zipcode, bday, validate, 
     const _update = ()=>{
         validate(inputs, account)
     }
+
     return (
         <div>
         <h1> Update your profile information </h1>
@@ -69,7 +71,7 @@ export default connect(
             validate: (inputs, account) => Validate.validateForm(inputs, account, dispatch),
             routePage: (page) => {
                 return dispatch({ type: Actions.ROUTE_TO, location: page })
-            }
+            },
         }
     }
 )(Profile)

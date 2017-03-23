@@ -33,6 +33,7 @@ export const resource = (method, endpoint, payload) => {
         })
 }
 
+// Communicating with backend for getting all articles
 export const fetchArticles = () => {
     return (dispatch) => {
         resource('GET', 'articles')
@@ -46,6 +47,7 @@ export const fetchArticles = () => {
     }
 }
 
+// get a user's headline
 export const updateHeadline = (headline) => (dispatch) => {
     resource("PUT", "headline", {
         headline: headline
@@ -58,6 +60,7 @@ export const updateHeadline = (headline) => (dispatch) => {
         })
 }
 
+// a series of steps for login a user
 export const loginFetch = (username, password) => (dispatch) => {
     resource('POST', 'login', {
         username, password
@@ -82,6 +85,7 @@ export const loginFetch = (username, password) => (dispatch) => {
         })
 }
 
+// register a new user with the server
 export const register = (action) => (dispatch) => {
     resource('POST', 'register', {
         username: action.account.name,
@@ -100,6 +104,7 @@ export const logout = () => (dispatch) => {
     dispatch(logoutFetch())
 }
 
+// login out a user
 export const logoutFetch = () => (dispatch) => {
     resource('PUT', 'logout')
         .then(r => {

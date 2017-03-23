@@ -6,7 +6,6 @@ import Main from './Main/main'
 import Profile from './Profile/profile'
 
 export const Home = ({ location }) => {
-    console.log(location)
     if (location === 'LANDING') {
         return (
             <div className="container-fluid">
