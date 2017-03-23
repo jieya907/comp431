@@ -74,8 +74,6 @@ describe( 'Validate authentication', () => {
 
         loginFetch("someone", "something")(
             fn => (action) => {
-                console.log("TESTING LOGIN")
-                console.log(action.type)
                 expect(action.type).to.eql("ERROR")
             }
         )

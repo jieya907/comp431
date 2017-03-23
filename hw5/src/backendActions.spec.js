@@ -41,7 +41,6 @@ describe('Validate actions', () => {
 
         resource('GET', 'sample')
             .then( r => {
-                console.log(r)
                 expect(r).to.be.ok
 
             })
