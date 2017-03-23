@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import * as Actions from '../../actions'
 import * as Validate from '../../validate'
 
-export const Profile = ({errorMessage, account, update, routePage}) => {
+export const Profile = ({account, errorMessage, email, zipcode, bday, validate, update, routePage}) => {
     let inputs = {}
 
     const _route = (page) => {
@@ -12,7 +12,7 @@ export const Profile = ({errorMessage, account, update, routePage}) => {
     } 
 
     const _update = ()=>{
-        update (Validate.validateForm(inputs, account))
+        validate(inputs, account)
     }
     return (
         <div>
@@ -26,22 +26,17 @@ export const Profile = ({errorMessage, account, update, routePage}) => {
 
         <li>Email
         <input type="email" placeholder="e.g. someone@gmail.com" pattern="\w+@\w+\.+[a-z]+$" ref={(node)=> inputs = {...inputs, email: node}} required/> 
-        <span>{account.email}</span> 
-        </li>
-
-        <li>Phone
-        <input type="tel" pattern="\d{10}" placeholder="123"  title="only digits allowed" ref={(node)=> inputs = {...inputs, phone:node}}  />
-        <span>{account.phone}</span> 
+        <span>{email}</span> 
         </li>
 
         <li>Date of Birth
         <input type="date" ref={(node)=> inputs = {...inputs, bday: node}} />
-        <span>{account.bday}</span> 
+        <span>{bday}</span> 
         </li>
 
         <li>Zipcode
         <input type="text" pattern="\d{5}" ref={(node)=> inputs = {...inputs, zipcode: node}} />
-        <span>{account.zipcode}</span> 
+        <span>{zipcode}</span> 
         </li>
 
         <li>Password
@@ -61,11 +56,17 @@ export const Profile = ({errorMessage, account, update, routePage}) => {
 }
 
 export default connect(
-    (state) => ({ errorMessage: state.errorMessage , account: state.profAccount}),
+    (state) => ({ 
+        account: state.account,
+        errorMessage: state.errorMessage , 
+        email: state.email,
+        zipcode: state.zipcode,
+        bday: state.dob
+    }),
     (dispatch) => {
         return {
             update: (action) => dispatch(action),
-
+            validate: (inputs, account) => Validate.validateForm(inputs, account, dispatch),
             routePage: (page) => {
                 return dispatch({ type: Actions.ROUTE_TO, location: page })
             }

@@ -66,12 +66,14 @@ export const loginFetch = (username, password) => (dispatch) => {
         .then(r => {
             dispatch({type: "LOGIN", headline: r.headlines[0]})
         })
+        .then(r => resource('GET', 'avatars'))
+        .then(r => dispatch({type: "UPDATE_AVATAR",field: r.avatars[0].avatar}))
+        .then(r => {
+            fetchProfile()(dispatch)
+        })
         .then(r => {
             fetchArticles()(dispatch)
         })    
-        .then(r=> {
-            fetchProfile()(dispatch)
-        })
         .then(r => {
             updateFollowing("GET", username)(dispatch)
         })

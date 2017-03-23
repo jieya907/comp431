@@ -52,7 +52,7 @@ describe('Validate Profile actions', () => {
     })
 
     it (' should fetch the users profile information ', (done) => {
-       
+
         mock(`${url}/email`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -88,9 +88,6 @@ describe('Validate Profile actions', () => {
                         break
                     case 'UPDATE_ZIPCODE':
                         expect(action.field).to.eql(77005)
-                        break
-                    case 'UPDATE_AVATAR':
-                        expect(action.field).to.eql('img')
                         break
                 }
             }))

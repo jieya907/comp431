@@ -1,3 +1,4 @@
+import { resource, url } from './backend.js'
 import * as Actions from './actions'
 
 const help = {"name":"Your full name", "email":"Please enter your email address",
@@ -63,18 +64,26 @@ export const validatePW = (pw, pwc, account) => {
 
 }
 
-export const validateForm = (inputs, account) => {
+const updateItem = (field, payload) => (dispatch) => {
+    resource('PUT', field, payload)
+        .then(r => {
+            dispatch({type: 'UPDATE_'+ field.toUpperCase() , field: r[field]})
+        })
+}
+
+export const validateForm = (inputs, account, dispatch) => {
     let result = validateName(inputs['name'], account);
     if (result.type === Actions.ERROR) {
         return result
     }
+
     result = validateWithPattern('email', inputs['email'], result.account); 
     if (result.type === Actions.ERROR) {
         return result
     }
-    result = validateWithPattern('phone', inputs['phone'], result.account);
-    if (result.type === Actions.ERROR) {
-        return result
+    
+    if (result.type != Actions.NOP && result.account.email) {
+        updateItem('email', {'email': result.account.email})(dispatch)
     }
     result = validateBDay(inputs['bday'], result.account) 
     if (result.type === Actions.ERROR) {
@@ -83,7 +92,9 @@ export const validateForm = (inputs, account) => {
     result = validateWithPattern('zipcode', inputs['zipcode'], result.account) 
     if (result.type === Actions.ERROR) {
         return result
-
+    }
+    if (result.type != Actions.NOP && result.account.zipcode) {
+        updateItem('zipcode', {'zipcode': result.account.zipcode})(dispatch)
     }
     result = validatePW(inputs['password'], inputs['passwordconf'], result.account); 
     if ( result.type === Actions.ERROR) {
