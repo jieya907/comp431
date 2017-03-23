@@ -1,6 +1,6 @@
 require('expose?$!expose?jQuery!jquery')
 require("bootstrap-webpack")
-require('./styles.css')
+require('../dist/styles.css')
 
 import React from 'react'
 import { render } from 'react-dom'

@@ -14,17 +14,17 @@ export const Card = ({text, time, image, author, comments}) => (
     <div className="editBtn">
     <button>Edit</button>
     <button>Comment</button>
-    <div className="comment">
+    <ul className="list-group">
     {
         comments.map(({author, date, text}, id) => {
             return (
-                <li key={id}> 
+                <li className="list-group-item" key={id}> 
                 <span> {author} commented {text} on {date} </span>
                 </li>
             )
         })
     }
-    </div>
+    </ul>
     </div>
     </div>
 )

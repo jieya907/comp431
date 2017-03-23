@@ -31,7 +31,14 @@ const articles = {
     ]
 
 }
+
 describe('Validate article actions', () => {
+ if (mockery.enable) {
+            mockery.enable({warnOnUnregistered: false, useCleanCache:true})
+            mockery.registerMock('node-fetch', fetch)
+            require('node-fetch')
+        }
+
     beforeEach(() => {
         global.fetch = fetch
     })
@@ -52,17 +59,14 @@ describe('Validate article actions', () => {
             json: articles
         })
 
-        const articleHelper = () => (dispatch) => {
-            dispatch(fetchArticles())
-        }
-
-
-        fetchArticles()( fn => (action) => {
+       
+       fetchArticles()((action) => {
+           console.log(action)
             expect(action.type).to.eql("UPDATE_CONTENT")
-            expect(action.contents).to.deep.eql(articles)
+            expect(action.contents).to.deep.eql(articles.articles)
 
-        })
-        done()
+           done()
+       })
     })
 
 

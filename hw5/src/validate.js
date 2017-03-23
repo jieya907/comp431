@@ -1,6 +1,10 @@
 import { resource, url } from './backend.js'
 import * as Actions from './actions'
-
+/*
+ * This file validates the fields in a form and dispatch to 
+ * update information to the server as needed
+ *
+ */
 const help = {"name":"Your full name", "email":"Please enter your email address",
         "phone": "Your phone number. Digits only", 
         "birthday":"Your date of birth, must be over 16",
@@ -18,6 +22,7 @@ export const validateName = (nameInput, account) => {
 
 }
 
+// For fields that can be validated with regex patterns
 export const validateWithPattern = (field, input, account) => {
     if (input.value) {
         if (!input.value.match(input.pattern)) {
@@ -39,8 +44,9 @@ export const validateBDay = (input,account) => {
         if (Math.abs(ageDate.getFullYear() - 1970) <18) {
             return {type: Actions.ERROR, text: "Must be over 18"};
         }
-        account['bday'] = input.value;
-        return {type: Actions.UPDATE_ACCOUNT, account};
+        return {
+            type: Actions.UPDATE_ACCOUNT, 
+            account: {...account, bday: input.value}};
     } else {
         return {type: Actions.NOP, account}
     }
@@ -71,6 +77,8 @@ const updateItem = (field, payload) => (dispatch) => {
         })
 }
 
+
+// Validate the fields and dispatch to update user info
 export const validateForm = (inputs, account, dispatch) => {
     let result = validateName(inputs['name'], account);
     if (result.type === Actions.ERROR) {
@@ -104,6 +112,7 @@ export const validateForm = (inputs, account, dispatch) => {
     return {type: Actions.UPDATE_PROF_ACCOUNT, account: result.account}
 }
 
+// validate the form and all fields are required to fill out
 export const validateFormRequired = (inputs, account) => {
     let result = validateName(inputs['name'], account);
     if (result.type === Actions.ERROR || result.type === Actions.NOP) {

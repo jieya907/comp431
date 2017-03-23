@@ -5,7 +5,6 @@ import * as Actions from './actions'
 
 import { expect } from 'chai'
 
-const initialItems = require('./initialState.json')
 
 // Expected what the initial state to be 
 const initialState = {
@@ -14,7 +13,7 @@ const initialState = {
     errorMessage: "",
     following: [],
     location: 'LANDING',
-    profAccount : initialItems.profAccount,
+    profAccount : {},
     search: "",
     headline: "I NEED 8 HRS SLEEP",
     contents: [{"blah": "blah"}]

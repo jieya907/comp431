@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import mockery from 'mockery'
-import { login, loginFetch, logout, url } from './backend'
+import { login, loginFetch, logoutFetch, url } from './backend'
 
 // npm install https://www.clear.rice.edu/comp431/sample/mock-fetch.tgz
 import fetch, { mock } from 'mock-fetch'
@@ -87,10 +87,9 @@ describe( 'Validate authentication', () => {
             headers: headerJson
         })
 
-        logout()(fn => fn(action => {
+        logoutFetch()(action => {
             expect(action.type).to.eql("LOGOUT")
             done()
-        }))
-            
+        })
     })
 })

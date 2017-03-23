@@ -15,13 +15,14 @@ export const AddFollow = ({ addFollow }) => {
         }
     }
     return (<span>
-        <input name="inputAdd" type="text" placeholder="Username" ref={(node) => newFollow = node} />
+        <input name="inputAdd" type="text" 
+        placeholder="Username" ref={(node) => newFollow = node} />
         <button name="btnAdd" onClick={_addFollow}>Add User to Follow</button>
         </span>)
 
 }
 
-
+// Sidebar that contains the list of following users
 export const Sidebar = ({following, addFollow})=> {
     return (
         <div className="col-sm-3" id="sidebar">
