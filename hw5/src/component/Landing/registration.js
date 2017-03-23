@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router';
 
 import * as Actions from '../../actions'
-
+import { register } from '../../backend.js'
 import * as Validate from '../../validate'
 
-export const Registration = ({ errorMessage, account, update }) => {
+export const Registration = ({ account, routePage, update, reportError, reportSuccess }) => {
     let inputs = {}
 
     const _route = () => {
@@ -15,21 +15,20 @@ export const Registration = ({ errorMessage, account, update }) => {
         const valResult = Validate.validateFormRequired(inputs, account)
         switch (valResult.type) {
             case Actions.ERROR:
-                update(valResult)
+                reportError(valResult.text)
                 break
             case Actions.NOP:
-                update({type: Actions.ERROR, text: "Please complete all input fields."})
+                reportError("Please complete all input fields.")
                 break
             case Actions.UPDATE_ACCOUNT:
                 update(valResult)
-                routePage('MAIN')
+                reportSuccess("Successfully regisitered but cannot log in yet")
         }
     }
 
     return (
         <div className="col-sm-6">
         <h2> Register with your information </h2>
-        <b>{errorMessage}</b>
         <ul className="registration">
         <li>Display Name 
         <input type="text" placeholder="Your Name" ref={(node)=> inputs = {...inputs, name:node}}required/> 
@@ -68,18 +67,19 @@ export const Registration = ({ errorMessage, account, update }) => {
 }
 
 Registration.propTypes = {
-    errorMessage: PropTypes.string.isRequired,
     update: PropTypes.func.isRequired,
     routePage: PropTypes.func.isRequired
 }
 
 export default connect(
-    (state) => ({ errorMessage: state.errorMessage, account: state.account }),
+    (state) => ({ account: state.account }),
     (dispatch) => {
         return {
-            update: (action) => dispatch(action),
+            update: (action) => register(action)(dispatch),
+            reportError: (msg) => Actions.setErrorMsg(msg)(dispatch),
+            reportSuccess: (msg) => Actions.setSuccessMsg(msg)(dispatch),
             routePage: (page) => {
-                return dispatch({ type: Actions.ROUTE_TO, location: page })
+                return dispatch({type: Actions.ROUTE_TO, location: page })
             }
 
         }

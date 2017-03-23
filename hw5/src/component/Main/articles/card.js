@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 const stmp2date = (author, time) => {
-    return author + " posted at "  + new Date(parseInt(time))
+    return author + " posted at "  + time
 }
 
 export const Card = ({text, time, image, author}) => (

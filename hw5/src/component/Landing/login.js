@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import {  loginFetch, fetchArticles } from '../../backend'
+import {  loginFetch } from '../../backend'
+import { fetchProfile } from '../../component/Profile/profileAction.js'
 
-export const Login = ({locallogin, articles})=> {
+export const Login = ({locallogin, profile})=> {
 
     let uname;
     let pw;
@@ -11,7 +12,7 @@ export const Login = ({locallogin, articles})=> {
     const _login = ()=> {
         if (uname && uname.value && pw && pw.value) {
             locallogin(uname.value, pw.value)
-            //articles()
+            //profile()
         }
     }
 
@@ -28,6 +29,8 @@ export const Login = ({locallogin, articles})=> {
 
 export default connect(
     (state) => ({ errorMessage: state.errorMessage }),
-    (dispatch) => ({locallogin: (username, password) => loginFetch(username, password)(dispatch),
-                   articles: () => fetchArticles()(dispatch)})
+    (dispatch) => ({
+        locallogin: (username, password) => loginFetch(username, password)(dispatch),
+        profile: () => fetchProfile(dispatch)
+    })
 )(Login)

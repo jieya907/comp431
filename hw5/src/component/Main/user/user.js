@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import { unfollowFetch } from './userActions'
+
 export const User = ({account, name, text, image, unfollow}) => {
     return (
         <div>
@@ -19,7 +21,7 @@ export default connect (
     (state) => ({account: state.account}),
     (dispatch, ownProps) => {
         return {
-            unfollow: () => dispatch({ type: "UNFOLLOW", id: ownProps.id})
+            unfollow: () => unfollowFetch(ownProps.name)(dispatch)
         }
     }
 )(User)

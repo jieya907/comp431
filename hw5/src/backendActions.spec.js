@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import mockery from 'mockery'
 import { loginFetch, resource, url } from './backend'
-import { setErrorMsg } from './actions'
+import { setErrorMsg, setSuccessMsg } from './actions'
 
 // npm install https://www.clear.rice.edu/comp431/sample/mock-fetch.tgz
 import fetch, { mock } from 'mock-fetch'
@@ -94,6 +94,12 @@ describe('Validate actions', () => {
     })
 
     it ('should update success message', (done) => {
+        const msg = 'test message'
+        setSuccessMsg(msg)(a => {
+            expect(a.type).to.equal('SUCCESS')
+            expect(a.text).to.equal(msg)
+        })
+
         done()
     })
 })

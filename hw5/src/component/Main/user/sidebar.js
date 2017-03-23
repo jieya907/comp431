@@ -3,18 +3,14 @@ import { connect } from 'react-redux'
 
 import User from "./user"
 import Self from "./self"
+import { updateFollowing } from './userActions'
 
 export const AddFollow = ({ addFollow }) => {
 
     let newFollow;
     const _addFollow = () => {
         if (newFollow && newFollow.value) {
-            addFollow(
-                {
-                    name:newFollow.value,
-                    text: "Hello!",
-                    image: "http://loremflickr.com/320/240"
-                })
+            addFollow(newFollow.value)
             newFollow.value = ""
         }
     }
@@ -33,9 +29,9 @@ export const Sidebar = ({following, addFollow})=> {
         <AddFollow addFollow={addFollow}/>
         <ul>
         {
-            following.map((obj) => (
-                <User key={obj.id} id={obj.id} name={obj.name} text={obj.text} image = {obj.image}/>
-            ))
+            following.map((obj) => {
+                return (<User key={obj.id} id={obj.id} name={obj.name} text={obj.text} image = {obj.image}/>)
+            })
         }
         </ul>
         </div>
@@ -46,7 +42,7 @@ export default connect(
     (state) => ({following: state.following}),
     (dispatch) => {
         return {
-            addFollow: (account) => dispatch({ type: "ADD_FOLLOW", account})
+            addFollow: (username) => updateFollowing("PUT", username)(dispatch)
         }
     }
 )(Sidebar)

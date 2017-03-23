@@ -9,15 +9,7 @@ import { findDOMNode } from 'react-dom'
 import * as Actions from '../../../actions' ;
 import { Articles, AddArticle } from './articles'
 
-const findByName = (children, name) => {
-    const result = Array.prototype.filter.call(children, it => it.name === name)
-    return result.length ? result[0] : null
-}
-
-const findByClassname = (children, classname) => {
-    const result = Array.prototype.filter.call(children, it => it.className.indexOf(classname) >= 0)
-    return result.length ? result[0] : null
-}
+import { addArticleFetch } from './articleAction'
 
 describe('Validate Article View', ()=>{
 
@@ -36,30 +28,14 @@ describe('Validate Article View', ()=>{
 
 
     it ('should dispatch actions to create a new article', ()=>{
-        const article = "new post";
-        const expectedAction = {
-            type: Actions.ADD_CONTENT,
-            article
+        const article = {
+            text: "another post"
         }
-
-        let action = {}
-        const addArticle = TestUtils.renderIntoDocument(
-            <div>
-                <AddArticle addArticle={ (text) => { 
-                    action = {type: "ADD_CONTENT", article: text}
-                }}/>
-            </div>
-        ).children[0]
-
-        const input = findByName(addArticle.children, 'inputArticle')
-        expect(input.type).to.equal('text')
-        expect(input.value).to.equal('')
-        input.value = article // update the text in the input
-        TestUtils.Simulate.change(input)
-
-        const button = findByName(addArticle.children, 'btnAddArticle')
-        expect(action).to.deep.equal({})
-        TestUtils.Simulate.click(button)
-        expect(action.type).to.deep.equal(expectedAction.type)
+        addArticleFetch(article)(
+            fn => (action) => {
+                expect(action.type).to.eql("ADD_CONTENT")
+                expect(action.article.text).to.eql("another post")
+            }
+        )
     })
 })

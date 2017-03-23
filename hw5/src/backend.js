@@ -1,12 +1,13 @@
 import { setErrorMsg } from './actions'
-const url = 'https://webdev-dummy.herokuapp.com'
+export const url = 'https://webdev-dummy.herokuapp.com'
+import { updateFollowing } from './component/Main/user/userActions'
+import { fetchProfile } from './component/Profile/profileAction.js'
 
 // This function is copied from the sample code in inclass 14
 // method is GET, POST, PUT...
 // endpoint is "headline, loging..."
 // payload is the json content.
-const resource = (method, endpoint, payload) => {
-    console.log(`${method} ${endpoint}`)
+export const resource = (method, endpoint, payload) => {
     const options = {
         method,
         credentials: 'include',
@@ -18,7 +19,6 @@ const resource = (method, endpoint, payload) => {
 
     return fetch(`${url}/${endpoint}`, options)
         .then(r => {
-            console.log(endpoint + " "  + r.status)
             if (r.status === 200) {
                 if (r.headers.get('Content-Type').indexOf('json') > 0) {
                     return r.json()
@@ -33,9 +33,32 @@ const resource = (method, endpoint, payload) => {
         })
 }
 
+export const fetchArticles = () => {
+    return (dispatch) => {
+        resource('GET', 'articles')
+            .then( r => {
+                dispatch({type: "UPDATE_CONTENT", contents: r.articles })
+            })
+            .catch(r => {
+                setErrorMsg("Cannot get any articles")(dispatch)
 
+            })
+    }
+}
 
-const loginFetch = (username, password) => (dispatch) => {
+export const updateHeadline = (headline) => (dispatch) => {
+    resource("PUT", "headline", {
+        headline: headline
+    })
+        .then(r => {
+            dispatch({type: "UPDATE_HEADLINE", text: headline})
+        })
+        .catch(r => {
+            setErrorMsg(r.message)(dispatch)
+        })
+}
+
+export const loginFetch = (username, password) => (dispatch) => {
     resource('POST', 'login', {
         username, password
     })
@@ -46,18 +69,36 @@ const loginFetch = (username, password) => (dispatch) => {
         .then(r => {
             fetchArticles()(dispatch)
         })    
-    //.then (articleHelper()(dispatch))
+        .then(r=> {
+            fetchProfile()(dispatch)
+        })
+        .then(r => {
+            updateFollowing("GET", username)(dispatch)
+        })
         .catch( r => {
             setErrorMsg(r.message)(dispatch)
         })
 }
 
+export const register = (action) => (dispatch) => {
+    resource('POST', 'register', {
+        username: action.account.name,
+        dob: action.account.bday,
+        email: action.account.email,
+        zipcode: action.account.zipcode,
+        password: action.account.password
+    })
+        .then(r => dispatch(action))
+        .catch( r=> {
+            setErrorMsg(r.message)(dispatch)
+        })
+}
 
-const logout = () => (dispatch) => {
+export const logout = () => (dispatch) => {
     dispatch(logoutFetch())
 }
 
-const logoutFetch = () => (dispatch) => {
+export const logoutFetch = () => (dispatch) => {
     resource('PUT', 'logout')
         .then(r => {
             dispatch( {type: "LOGOUT"})
@@ -67,24 +108,3 @@ const logoutFetch = () => (dispatch) => {
 }
 
 
-const articleHelper = () => (dispatch) => {
-    dispatch(fetchArticles())
-}
-
-const fetchArticles = () => {
-    return (dispatch) => {
-        console.log("calling resource in fetchArticles")
-        resource('GET', 'articles')
-            .then( r => {
-                console.log(r.articles)
-                dispatch( {type: "UPDATE_CONTENT", contents: r.articles })
-            })
-            .catch(r => {
-                console.log("in catch")
-                setErrorMsg("Cannot get any articles")(dispatch)
-
-            })
-    }
-}
-
-export { loginFetch,logout, logoutFetch, fetchArticles, resource, url }

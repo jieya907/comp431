@@ -51,7 +51,6 @@ describe( 'Validate authentication', () => {
         
         testLogin(username, password)(
             function(fn) { 
-                console.log(fn)
                 return fn(function(action) {
                     expect(action.type).to.eql("LOGIN")
                     expect(action.headline).to.deep.eql(
@@ -63,7 +62,7 @@ describe( 'Validate authentication', () => {
                 })
             }
         )
-    })
+        })
 
 
     it('should not log in an invalid user', (done) => {
@@ -73,11 +72,14 @@ describe( 'Validate authentication', () => {
             status: 401   
         })
 
-        testLogin("someone", "something")(fn => fn( action => {
-            expect(action.type).to.eql("ERROR")
-            done()
-        }))
-
+        loginFetch("someone", "something")(
+            fn => (action) => {
+                console.log("TESTING LOGIN")
+                console.log(action.type)
+                expect(action.type).to.eql("ERROR")
+            }
+        )
+        done()
     })
 
     it('should logout a user', (done) => {
