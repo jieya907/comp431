@@ -7,14 +7,12 @@ import { render } from 'react-dom'
 
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux'
-import createLogger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux'
 
 import Reducer from './reducers'
 import Home from './component/Home'
 
-const logger = createLogger()
-const store = createStore(Reducer, applyMiddleware(logger))
+const store = createStore(Reducer)
 
 render(
     <Provider store={store}>
