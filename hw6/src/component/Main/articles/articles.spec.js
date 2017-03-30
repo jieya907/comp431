@@ -34,6 +34,7 @@ describe('Validate Article View', ()=>{
         addArticleFetch(article)(
             fn => (action) => {
                 expect(action.type).to.eql("ADD_CONTENT")
+                console.log(action.article)
                 expect(action.article.text).to.eql("another post")
             }
         )

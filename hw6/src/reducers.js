@@ -33,6 +33,14 @@ const Reducer = (state={
                 articles:[...action.contents]}
         case Actions.UPDATE_HEADLINE:
             return {...state, headline: action.text}
+        case Actions.ADD_COMMENT: // used for updating comments
+            const newArticles = state.contents.map((item) => (
+                item._id === action.article._id? action.article :item
+            ))
+            return {...state, 
+                contents: newArticles,
+                articles: newArticles
+            }
         case Actions.ADD_CONTENT: // used for adding articles
             return {...state, 
                 contents: [ action.article, ...state.contents],
@@ -74,7 +82,8 @@ const Reducer = (state={
                     name:action.headline.username,
                 },
                 location: "MAIN",
-                headline: action.headline.headline
+                headline: action.headline.headline,
+                successMessage: "You are successfully logged in"
             }
         case Actions.LOGOUT:
             return {

@@ -22,7 +22,7 @@ export const Login = ({locallogin, profile})=> {
         <br/>
         <input name="loginName" type="text" placeholder="Username" ref={(node) => uname = node}/>
         <input name="loginPw" type="password" placeholder="Password" ref={(node) => pw = node}/>
-        <button onClick={()=>_login()}>Log In</button>
+        <button id="login" onClick={()=>_login()}>Log In</button>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { unfollowFetch } from './userActions'
 
 export const User = ({account, name, text, image, unfollow}) => {
     return (
-        <div>
+        <div className="following">
             <b> {name}</b>
             <br/>
             <span> {text}</span>

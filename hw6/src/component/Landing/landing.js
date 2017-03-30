@@ -9,7 +9,7 @@ export const Landing = ({errorMessage, successMessage}) => (
     	<h1> Welcome to Rice book! </h1>
         <b className="error"><strong>{errorMessage}</strong></b>
         <br/>
-        <b className="success"><strong>{successMessage}</strong></b>
+        <b name="success"><strong>{successMessage}</strong></b>
         <Login/>
         <Registration/>
     </div>

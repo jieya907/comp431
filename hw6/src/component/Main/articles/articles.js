@@ -10,6 +10,7 @@ import { filterContent } from './filterContent'
 export const AddArticle = ({user, addArticle}) => {
     let newContent;
     let newArticle = {};
+    let newImage;
 
     const _addArticle = () => {
         if (newContent && newContent.value) {
@@ -18,7 +19,8 @@ export const AddArticle = ({user, addArticle}) => {
             newArticle['text'] = newContent.value;
             newArticle['date'] = new Date(Date.now());
             newArticle['img'] = "";
-            addArticle(newArticle)
+            newArticle['comments'] = [];
+            addArticle(newArticle, newImage)
             newContent.value ="Post"
         }
     }
@@ -28,12 +30,18 @@ export const AddArticle = ({user, addArticle}) => {
         }
     }
 
+    const handleImageChange = (e) => {
+        if(e.target.files.length >0) {
+        newImage = e.target.files[0]
+        }
+    }
+
     return (<span>
         <input name="inputArticle" type="text" 
         placeholder="Post" ref={(node) => newContent = node} />
         <button name="btnAddArticle" onClick={_addArticle}>Add Post</button>
         <button name="btnClear" onClick={_clear}>Clear</button>
-        <input type="file"/>
+        <input type="file" accept="image/*" onChange={(e) => handleImageChange(e)}/>
 
         </span>)
 }
@@ -56,11 +64,11 @@ export const Articles = ({ user, contents, addArticle, search }) => {
         placeholder="Search your feed" 
         ref={(node) => searchTerm = node} 
         onChange={_search} />
-        <div className="article">
+        <div name="articles">
         {
             contents.map((obj, id) => (
                 <Card key={id} text={obj.text} time={obj.date} 
-                image={obj.img} author={obj.author} comments={obj.comments}/>
+                image={obj.img} author={obj.author} comments={obj.comments} id={obj._id}/>
             ))}
         </div>
         </div>)
@@ -76,7 +84,7 @@ export default connect(
     },
     (dispatch) => {
         return {
-            addArticle: (article) => addArticleFetch(article)(dispatch),
+            addArticle: (article, newImage) => addArticleFetch(article, newImage)(dispatch),
             search: (key) => searchAction(key)(dispatch)
         }
     }

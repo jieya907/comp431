@@ -6,7 +6,7 @@ import { logoutFetch } from '../../backend.js'
 import Articles from './articles/articles'
 import Sidebar from "./user/sidebar"
 import * as Actions from '../../actions'
-export const Main = ({ location, routePage }) => {
+export const Main = ({ location, message, routePage, logOut }) => {
     const _route = (page) => {
         routePage(page)
     }
@@ -18,8 +18,9 @@ export const Main = ({ location, routePage }) => {
     return (
         <div className="row">
             <h1>Main Page </h1>
+            <b name="mainMessage">{message} </b>
             <button onClick={()=>_route('PROFILE')}>Profile Page </button>
-            <button onClick={()=>_route('LANDING')}>Log Out</button>
+            <button id="logout" onClick={()=>_logout()}>Log Out</button>
             <Sidebar/>
             <Articles/>
         </div>
@@ -31,7 +32,10 @@ Main.propTypes = {
     routePage: PropTypes.func.isRequired,
 }
 
-export default connect ((state) => ({location: state.location}), 
+export default connect ((state) => ({
+    location: state.location,
+    message: state.successMessage,
+}), 
     (dispatch) => {
         return {
             routePage : (page) => Actions.routeTo(page)(dispatch),

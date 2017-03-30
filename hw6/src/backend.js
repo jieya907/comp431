@@ -33,6 +33,32 @@ export const resource = (method, endpoint, payload) => {
         })
 }
 
+export const resourceForm = (method, endpoint, payload) => {
+    console.log(payload)
+    const options = {
+        method,
+        credentials: 'include',
+        body: payload
+    }
+
+    return fetch (`${url}/${endpoint}`, options)
+        .then(r => {
+            if (r.status === 200) {
+                console.log("ok")
+                if (r.headers.get('Content-Type').indexOf('json') > 0) {
+                    return r.json()
+                } else {
+                    return r.text()
+                }
+            } else {
+                // useful for debugging, but remove in production
+                console.error(`${method} ${endpoint} ${r.statusText}`)
+                throw new Error(r.statusText)
+            }
+        })
+
+}
+
 // Communicating with backend for getting all articles
 export const fetchArticles = () => {
     return (dispatch) => {
@@ -109,6 +135,7 @@ export const logoutFetch = () => (dispatch) => {
     resource('PUT', 'logout')
         .then(r => {
             dispatch( {type: "LOGOUT"})
+            dispatch({type: "SUCCESS", text: "You have successfully logged out"})
         }).catch( r => {
             setErrorMsg(r.message)(dispatch)
         })

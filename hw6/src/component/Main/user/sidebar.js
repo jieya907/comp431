@@ -15,9 +15,9 @@ export const AddFollow = ({ addFollow }) => {
         }
     }
     return (<span>
-        <input name="inputAdd" type="text" 
+        <input name="inputFollow" type="text" 
         placeholder="Username" ref={(node) => newFollow = node} />
-        <button name="btnAdd" onClick={_addFollow}>Add User to Follow</button>
+        <button name="btnAddFollow" onClick={_addFollow}>Add User to Follow</button>
         </span>)
 
 }
@@ -28,7 +28,7 @@ export const Sidebar = ({following, addFollow})=> {
         <div className="col-sm-3" id="sidebar">
         <Self />
         <AddFollow addFollow={addFollow}/>
-        <ul>
+        <ul id="followings">
         {
             following.map((obj) => {
                 return (<User key={obj.id} id={obj.id} name={obj.name} text={obj.text} image = {obj.image}/>)
