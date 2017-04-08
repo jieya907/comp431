@@ -73,7 +73,9 @@ export const validatePW = (pw, pwc, account) => {
 const updateItem = (field, payload) => (dispatch) => {
     resource('PUT', field, payload)
         .then(r => {
-            dispatch({type: 'UPDATE_'+ field.toUpperCase() , field: r[field]})
+            console.log(r)
+            dispatch({type: 'UPDATE_'+ field.toUpperCase() , 
+                field: r[field], message: r.message})
         })
 }
 
@@ -104,12 +106,16 @@ export const validateForm = (inputs, account, dispatch) => {
     if (result.type != Actions.NOP && result.account.zipcode) {
         updateItem('zipcode', {'zipcode': result.account.zipcode})(dispatch)
     }
-    result = validatePW(inputs['password'], inputs['passwordconf'], result.account); 
-    if ( result.type === Actions.ERROR) {
-        return result
 
-    }
-    return {type: Actions.UPDATE_PROF_ACCOUNT, account: result.account}
+    result = validatePW(inputs['password'], inputs['passwordconf'], result.account); 
+    console.log(result)
+    if (result.type != Actions.NOP && result.account.password) {
+        updateItem('password', {'password': result.account.password})(dispatch)
+    }else if ( result.type === Actions.ERROR) {
+        return (dispatch) => {
+            dispatch(result)
+        }
+    } 
 }
 
 // validate the form and all fields are required to fill out

@@ -11,7 +11,7 @@ export const User = ({account, name, text, image, unfollow}) => {
             <span> {text}</span>
             <img src={image}/>
             <div className= "editBtn">
-            <button onClick={unfollow}>Unfollow</button>
+            <button className='btnUnfollow' onClick={unfollow}>Unfollow</button>
             </div>
         </div>
     )

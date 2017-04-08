@@ -19,7 +19,7 @@ export const Main = ({ location, message, routePage, logOut }) => {
         <div className="row">
             <h1>Main Page </h1>
             <b name="mainMessage">{message} </b>
-            <button onClick={()=>_route('PROFILE')}>Profile Page </button>
+            <button id="btnProfile" onClick={()=>_route('PROFILE')}>Profile Page </button>
             <button id="logout" onClick={()=>_logout()}>Log Out</button>
             <Sidebar/>
             <Articles/>

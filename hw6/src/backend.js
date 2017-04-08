@@ -73,6 +73,21 @@ export const fetchArticles = () => {
     }
 }
 
+export const updateAvatarFetch = (img) => (dispatch) => {
+    if (img) {
+        let fd = new FormData()
+        fd.append('image', img)
+
+        resourceForm('PUT', 'avatar', fd)
+            .then(r => {
+                dispatch({type: 'UPDATE_AVATAR', field: r.avatar})
+            })
+            .catch(r => {
+                setErrorMsg(r.message)(dispatch)
+            })
+    }
+}
+
 // get a user's headline
 export const updateHeadline = (headline) => (dispatch) => {
     resource("PUT", "headline", {

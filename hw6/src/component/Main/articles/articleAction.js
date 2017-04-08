@@ -49,6 +49,31 @@ export const addCommentFetch = (text, articleId) => (dispatch) => {
     })
 }
 
+export const editCommentFetch = (text, articleId, commentId) => (dispatch) => {
+    resource('PUT', 'articles/' + articleId, {
+        text: text,
+        commentId: commentId,
+    }).then( r => {
+        console.log(r.articles)
+        dispatch({type: 'ADD_COMMENT', article: r.articles[0]})
+    })
+    .catch(r => {
+        setErrorMsg(r.message)(dispatch)
+    })
+}
+
+export const editArticleFetch = (text, articleId) => (dispatch) => {
+    resource('PUT', 'articles/' + articleId, {
+        text: text,
+    }).then( r => {
+        dispatch({type: 'EDIT_ARTICLE', article: r.articles[0]})
+    })
+    .catch(r => {
+        setErrorMsg(r.message)(dispatch)
+    })
+}
+
+
 // for dispatching actions for searching the articles
 export const searchAction = (term ) => (dispatch) => {
     dispatch({

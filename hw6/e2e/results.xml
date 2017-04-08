@@ -1,9 +1,18 @@
 
-> starter@1.0.0 e2e:base /Users/jieya/Downloads/mocking
+> starter@1.0.0 e2e:base /Users/jieya/Documents/Rice/Courses/Spring2017/431/comp431/hw6
 > mocha --opts e2e/mocha.opts e2e/*.spec.js "--reporter" "xunit"
 
-<testsuite name="Mocha Tests" tests="3" failures="0" errors="0" skipped="0" timestamp="Thu, 02 Mar 2017 01:56:25 GMT" time="11.194">
-<testcase classname="Test Dummy Server Example Page" name="should log in as the test user" time="0.547"/>
-<testcase classname="Test Dummy Server Example Page" name="Update the headline and verify the change" time="2.707"/>
-<testcase classname="shutdown" name="now" time="0.12"/>
+<testsuite name="Mocha Tests" tests="12" failures="0" errors="0" skipped="0" timestamp="Sat, 08 Apr 2017 16:24:04 GMT" time="53.571">
+<testcase classname="Test article actions" name="should create a new article" time="1.276"/>
+<testcase classname="Test article actions" name="should edit an article" time="0.6"/>
+<testcase classname="Test article actions" name="should search the article" time="1.74"/>
+<testcase classname="Validate following other users" name="should add a user to follow" time="1.057"/>
+<testcase classname="Validate following other users" name="should remove its following user and verify it decrease by 1" time="2.135"/>
+<testcase classname="Test login" name="should log in as the test user" time="0.553"/>
+<testcase classname="Test login" name="Update the headline and verify the change" time="2.733"/>
+<testcase classname="Test Profile update" name="should update the email" time="1.874"/>
+<testcase classname="Test Profile update" name="should update the zipcode" time="1.2"/>
+<testcase classname="Test Profile update" name="should update user password" time="1.495"/>
+<testcase classname="Test login" name="should register a new user" time="6.714"/>
+<testcase classname="shutdown" name="now" time="0.132"/>
 </testsuite>

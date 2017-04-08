@@ -3,6 +3,17 @@ import * as Actions from './actions'
 
 import { filterContent } from './component/Main/articles/filterContent.js'
 
+const _updateArticle = (state, action) => {
+    const newArticles = state.contents.map((item) => (
+        item._id === action.article._id? action.article :item
+    ))
+    return {...state, 
+        contents: newArticles,
+        articles: newArticles
+    }
+
+}
+
 const Reducer = (state={
     account: {},
     avatar: "",
@@ -34,18 +45,14 @@ const Reducer = (state={
         case Actions.UPDATE_HEADLINE:
             return {...state, headline: action.text}
         case Actions.ADD_COMMENT: // used for updating comments
-            const newArticles = state.contents.map((item) => (
-                item._id === action.article._id? action.article :item
-            ))
-            return {...state, 
-                contents: newArticles,
-                articles: newArticles
-            }
+            return _updateArticle(state, action)
         case Actions.ADD_CONTENT: // used for adding articles
             return {...state, 
                 contents: [ action.article, ...state.contents],
                 articles: [ action.article, ...state.contents]
             }
+        case Actions.EDIT_ARTICLE:
+            return _updateArticle(state, action)
         case Actions.SHOW_SEARCH:
             return {...state, 
                 search: action.key, 
@@ -73,6 +80,10 @@ const Reducer = (state={
             return {...state, zipcode: action.field}
         case Actions.UPDATE_FOLLOW:
             return {...state, following: []}
+        case Actions.UPDATE_PASSWORD:
+            console.log("in reducer")
+            return {...state, successMessage: action.message, 
+                password: action.field}
         case Actions.SUCCESS:
             return {...state, successMessage: action.text}
         case Actions.LOGIN:

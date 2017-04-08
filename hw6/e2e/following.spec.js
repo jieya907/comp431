@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { go, sleep, findId, findClass, findName, findCSS, By } from './selenium'
 import common from './common'
 
-describe('Test login', () => {
+describe('Validate following other users', () => {
 
     const user = 'cqw1test'
 
@@ -31,6 +31,24 @@ describe('Test login', () => {
 
     })
 
+    it('should remove its following user and verify it decrease by 1', (done) => {
+        let numFollowing;
+        sleep(1000)
+            .then(findClass('following')
+                .then( r=> {
+                    numFollowing = r.length;
+                }))
+            .then( _=> findClass('btnUnfollow')
+                .then(r => {
+                    r[numFollowing - 1].click()
+                }))
+            .then(sleep(1000))
+            .then( _ => findClass('following')
+                .then( r => {
+                    expect(r).to.have.length(numFollowing -1)
+                }))
+            .then(done)
+    })
 
     after('should log out', (done) => {
         common.logout().then(done)
