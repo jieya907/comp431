@@ -29,7 +29,6 @@ export const Card = ({text, time, image,
     }
 
     const _postEdits = () => {
-        console.log(newArticle)
         if (newArticle) {
             editArticle(newArticle)
         }

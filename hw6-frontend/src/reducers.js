@@ -81,7 +81,6 @@ const Reducer = (state={
         case Actions.UPDATE_FOLLOW:
             return {...state, following: []}
         case Actions.UPDATE_PASSWORD:
-            console.log("in reducer")
             return {...state, successMessage: action.message, 
                 password: action.field}
         case Actions.SUCCESS:

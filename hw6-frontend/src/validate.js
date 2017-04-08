@@ -73,7 +73,6 @@ export const validatePW = (pw, pwc, account) => {
 const updateItem = (field, payload) => (dispatch) => {
     resource('PUT', field, payload)
         .then(r => {
-            console.log(r)
             dispatch({type: 'UPDATE_'+ field.toUpperCase() , 
                 field: r[field], message: r.message})
         })
@@ -108,7 +107,6 @@ export const validateForm = (inputs, account, dispatch) => {
     }
 
     result = validatePW(inputs['password'], inputs['passwordconf'], result.account); 
-    console.log(result)
     if (result.type != Actions.NOP && result.account.password) {
         updateItem('password', {'password': result.account.password})(dispatch)
     }else if ( result.type === Actions.ERROR) {

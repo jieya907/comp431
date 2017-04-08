@@ -34,7 +34,6 @@ export const resource = (method, endpoint, payload) => {
 }
 
 export const resourceForm = (method, endpoint, payload) => {
-    console.log(payload)
     const options = {
         method,
         credentials: 'include',
@@ -44,7 +43,6 @@ export const resourceForm = (method, endpoint, payload) => {
     return fetch (`${url}/${endpoint}`, options)
         .then(r => {
             if (r.status === 200) {
-                console.log("ok")
                 if (r.headers.get('Content-Type').indexOf('json') > 0) {
                     return r.json()
                 } else {
