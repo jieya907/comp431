@@ -1,0 +1,76 @@
+
+span.submit {
+	float: right;
+	border-radius: 10px;
+	border: 2px solid green;
+	padding: 4px;
+}
+
+.login {
+	display: block;
+	width: 50%;
+    height: auto;
+    float: left;
+  padding: 1em;
+
+}
+
+.reg {
+	display: block;
+	margin-left: 50%;
+    height: auto;
+}
+
+.content {
+	width: 70%;
+	height: 100%;
+	float: left;
+}
+
+.hideImg {
+	display: none;
+}
+
+li {
+	list-style: none;
+	position: relative;
+	font-size: 15px;
+}
+
+li span {
+	white-space: pre-line;
+	word-break: break-all;
+	padding: 1px 60px 15px 15px;
+	line-height: 1.2;
+	transition: color 0.4s;
+}
+
+.editBtn {
+	display: block;
+}
+
+#sidebar img {
+	width: 7em;
+	height: auto;
+}
+
+#sidebar {
+	background-color: "seashell";
+}
+.card {
+	display: block;
+	padding-top: 1em;
+}
+
+h1 {
+	 text-align: center;
+}
+img{
+    height:200px; 
+    width:auto; 
+    display: block;
+}
+
+.hide {
+    display: none;
+}
