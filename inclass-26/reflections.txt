@@ -1,0 +1,21 @@
+1. What did you hope to learn but did not?
+    Some common technologies like JQuery or Angular
+2. What did you enjoy learning about?
+    Building react app was really fun. It was hard in the beginning but when it
+    makes sense, it's a lot easier to build than the previous assignments.
+3. What worked well in the course?
+    I like how the course covered a lot of materials. It introduced me a lot of new
+    concepts.
+4. What didn't work well in the course?
+    I think the grading scheme should be reviewed. For example, for students who
+    get 90% inclass exercises requirements correct and 1% of the requirements 
+    correct, there should be a difference on the grade to reflect that. 
+    Demerits is also really concerning. From the react assignment, demerits sum is a
+    lot more than the merits sum. I think it's a good idea to enforce good coding
+    style but there should be better ways to design the grading to incentivize it. 
+5. What could I have done to help you more?
+    I think all assignments except for HW5 have very clear rubric. HW5's requirements
+    on testing is very ambiguous. That can be improved. 
+    Also, a different classroom will be helpful. 
+
+
