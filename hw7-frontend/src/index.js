@@ -14,7 +14,7 @@ import Reducer from './reducers'
 import Home from './component/Home'
 const logger = createLogger()
 
-const store = createStore(Reducer , applyMiddleware(logger))
+const store = createStore(Reducer)
 
 render(
     <Provider store={store}>
