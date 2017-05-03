@@ -46,18 +46,27 @@ passport.use(new FacebookStrategy(
                 username: profile.displayName,
                 email: profile.emails[0]
             }
-            const prof = {
-                username: profile.username,
-                headline: "",
-                following: [],
-                email: profile.emails[0],
-                zipcode: '',
-                avatar: ""
-            }
 
-            new Profile(prof).save((err, prof) => {})
+            Profile.find({username: profile.displayName})
+                .exec((err, items)=> {
+                    console.log(items)
+                    console.log(items.length)
+                    if (items.length == 0) {
+                        const prof = {
+                            username: profile.username,
+                            headline: "",
+                            following: [],
+                            email: profile.emails[0],
+                            zipcode: '',
+                            avatar: "http://cdn.skim.gs/image/upload/v1456344012/msi/Puppy_2_kbhb4a.jpg"
+                        }
+                        new Profile(prof).save((err, prof) => {})
 
-            return done(null, profile)
+                        return done(null, profile)
+                    }
+                })
+
+
         })
     }));
 
@@ -159,15 +168,15 @@ const isLoggedIn = (req, res, next) => {
 
     if (sid) {
 
-    redis.hgetall(sid, (err, object) => {
-        if (object) {
-            console.log(object, "is logged in");
-            req.username = object[sid]
-            next()
-        } else{
-            res.sendStatus(401)
-        }
-    })
+        redis.hgetall(sid, (err, object) => {
+            if (object) {
+                console.log(object, "is logged in");
+                req.username = object[sid]
+                next()
+            } else{
+                res.sendStatus(401)
+            }
+        })
 
     } else if (req.isAuthenticated()) {
         console.log("req is authenticated")
